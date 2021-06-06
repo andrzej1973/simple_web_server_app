@@ -1,10 +1,8 @@
-FROM ubuntu:latest
-MAINTAINER Andrzej Mazur "andrzej@mazur.info"
-RUN apt-get update -y
-RUN apt-get install -y python-pip python-dev build-essential
-COPY . /app
-WORKDIR /app
-RUN pip install -r requirements.txt
-ENTRYPOINT ["python"]
-EXPOSE 5000
-CMD ["wsgi.py", "-p", "5000", "--host", "127.0.0.1"]
+FROM arm32v7/python:3.9.5-buster
+MAINTAINER andrzej@mazur.info
+WORKDIR /usr/PyScripts/simple_web_server_app/src
+COPY ./requirements.txt /usr/PyScripts/simple_web_server_app/
+COPY ./src/* /usr/PyScripts/simple_web_server_app/src/
+RUN pip3 install -r ../requirements.txt
+CMD ["python3", "./simple_web_server.py"]
+
