@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: simplewebserver
+  labels:
+        app: webserver
+spec:
+  nodeName: headlesspi #optional setting to assign Pod to particular Node
+  containers:
+  - name: simplewebserver
+    image: andrzejmazurinfo/simple_web_server_app:2.0  #hub.docker.com location
+    imagePullPolicy: IfNotPresent
+    ports:
+     - containerPort: 5001
